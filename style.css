@@ -1,28 +1,364 @@
-body
-{
-    font-family: Arial, sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 50px;    
+* {
+	box-sizing: border-box;
 }
+
+html,
+body {
+	height: 100%;
+}
+
+:root {
+	--bg-color: #0d0d0d;
+	--text-color: lime;
+	/* Cyber green */
+	--accent-color: #003b00;
+	--border-color: lime;
+	--header-bg: #1a1a1a;
+	--glow-text: 0 0 5px rgba(0, 255, 65, 0.5);
+	--font-stack: 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-stack);
+	line-height: 1.6;
+	color: var(--text-color);
+	background: var(--bg-color);
+	overflow-x: hidden;
+	position: relative;
+	padding-bottom: 2rem;
+}
+
+.scanline {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: linear-gradient(to bottom,
+			rgba(255, 255, 255, 0),
+			rgba(255, 255, 255, 0) 50%,
+			rgba(0, 0, 0, 0.1) 50%,
+			rgba(0, 0, 0, 0.1));
+	background-size: 100% 4px;
+	pointer-events: none;
+	z-index: 999;
+}
+
+.terminal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle, rgba(0, 20, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+	pointer-events: none;
+	z-index: 998;
+}
+
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 1rem;
 }
 
-h1 {
-    color: #2c3e50;
+.site-header {
+	background: #000;
+	border-bottom: 1px solid var(--border-color);
+	padding: 1rem 0;
+	box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
 }
 
-h2 {
-    margin-top: 25px;
-    color: #34495e;
+.header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
 }
 
-ul {
-    padding-left: 20px;
+.site-title {
+	margin: 0;
+	font-size: 1.25rem;
+	padding: 0.5rem 0;
+	color: var(--text-color);
+	text-shadow: var(--glow-text);
+}
+
+.nav a {
+	color: var(--text-color);
+	text-decoration: none;
+	margin-left: 1rem;
+	font-weight: 600;
+	transition: all 0.3s ease;
+}
+
+.nav a:hover {
+	background: var(--text-color);
+	color: #000;
+	box-shadow: 0 0 10px var(--text-color);
+}
+
+.main-grid {
+	display: grid;
+	grid-template-columns: 280px 1fr;
+	gap: 1.5rem;
+	padding: 2rem 0;
+}
+
+/* Standard Terminal Box */
+.terminal-box {
+	background: rgba(0, 20, 0, 0.9);
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+	border-top: 24px solid var(--header-bg);
+	/* Terminal header bar mock */
+	position: relative;
+	padding: 1.5rem;
+}
+
+.terminal-header {
+	position: absolute;
+	top: -24px;
+	/* Move into the border-top area */
+	left: 0;
+	width: 100%;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+
+.circle {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin-right: 6px;
+	display: inline-block;
+}
+
+.red {
+	background: #ff5f56;
+}
+
+.yellow {
+	background: #ffbd2e;
+}
+
+.green {
+	background: green;
+}
+
+.terminal-header .title {
+	margin-left: auto;
+	margin-right: auto;
+	color: grey;
+	font-size: 0.8rem;
+	font-family: sans-serif;
+}
+
+.profile {
+	text-align: center;
+}
+
+.avatar-container {
+	width: 140px;
+	height: 140px;
+	margin: 0 auto 1rem;
+	padding: 5px;
+	border: 2px dashed var(--border-color);
+	border-radius: 50%;
+	animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.avatar {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: black;
+	color: var(--text-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 2.5rem;
+	border: 1px solid var(--border-color);
+	text-shadow: var(--glow-text);
+}
+
+.name {
+	margin: 0.5rem 0 0;
+	font-size: 1.5rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.role {
+	margin: 0.25rem 0 0;
+	color: white;
+	font-size: 0.95rem;
+}
+
+.meta-list {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0 0;
+	color: lightgrey;
+	font-size: 0.9rem;
+	text-align: left;
+}
+
+.meta-list li {
+	margin: 0.5rem 0;
+	border-bottom: 1px solid #333;
+	padding-bottom: 2px;
+}
+
+/* Prompt */
+.prompt {
+	color: white;
+	margin-right: 8px;
+	font-weight: bold;
+}
+
+/* Blinking Cursor */
+.blink {
+	animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
+}
+
+/* Section Content */
+.about p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+.interests p {
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+
+.project {
+	border-left: 2px solid var(--border-color);
+	padding-left: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.project strong {
+	color: #fff;
+	text-shadow: var(--glow-text);
+}
+
+
+
+.skills-list {
+	list-style: none;
+	padding: 0;
+}
+
+.skills-list li {
+	margin: 0.5rem 0;
+	padding-left: 1rem;
+	position: relative;
+}
+
+.skills-list li::before {
+	content: "";
+}
+
+/* Removing default bullets, using > in HTML */
+
+/* Chess Placeholder */
+.chess-placeholder {
+	background: #001100;
+	border: 1px solid #004400;
+	padding: 1rem;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-family: var(--font-stack);
+}
+
+.chess-message {
+	border: 1px dashed var(--text-color);
+	padding: 1rem 2rem;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+/* Links */
+a {
+	color: inherit;
+}
+
+.contact a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.contact a:hover {
+	color: var(--text-color);
+	text-decoration: none;
+	background: #000;
+}
+
+.email-link {
+	font-size: 1.2rem;
+	margin: 1rem 0;
+}
+
+.comment {
+	color: darkgrey;
+	font-style: italic;
+}
+
+.site-footer {
+	margin-top: 3rem;
+	padding: 1rem 0;
+	color: darkgrey;
+	border-top: 1px solid darkred;
+	text-align: center;
+	font-size: 0.8rem;
+}
+
+@media (max-width: 760px) {
+	.main-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.header-inner {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.nav a {
+		margin-left: 0;
+		margin-right: 1rem;
+		display: inline-block;
+		margin-bottom: 0.5rem;
+	}
+
+	.avatar-container {
+		width: 100px;
+		height: 100px;
+	}
 }
