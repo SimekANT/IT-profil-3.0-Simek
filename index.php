@@ -1,9 +1,14 @@
 <?php
 $jsonData = file_get_contents('profile.json');
+
+if ($jsonData === false) {
+    die('Soubor profile.json nebyl nalezen.');
+}
+
 $data = json_decode($jsonData, true);
 
-if (!$data) {
-    die('Chyba při načítání dat.');
+if (json_last_error() !== JSON_ERROR_NONE) {
+    die('Chyba v JSON: ' . json_last_error_msg());
 }
 ?>
 
