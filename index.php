@@ -11,7 +11,6 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     die('Chyba v JSON: ' . json_last_error_msg());
 }
 
-// Generování náhodného session ID (nahrazuje JS)
 $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
 ?>
 
@@ -36,7 +35,6 @@ $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
 
 <main class="container main-grid">
 
-    <!-- PROFILE -->
     <aside class="profile terminal-box">
         <div class="avatar-container">
             <div class="avatar">
@@ -56,7 +54,6 @@ $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
         </ul>
     </aside>
 
-    <!-- ABOUT -->
     <section class="terminal-box about">
         <div class="terminal-content">
             <p><span class="prompt">user@antonin:~$</span> cat description.txt</p>
@@ -67,7 +64,6 @@ $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
         </div>
     </section>
 
-    <!-- SKILLS -->
     <section class="terminal-box skills">
         <div class="terminal-content">
             <ul class="skills-list">
@@ -81,7 +77,6 @@ $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
         </div>
     </section>
 
-    <!-- INTERESTS -->
     <section class="terminal-box interests">
         <div class="terminal-content">
             <?php foreach ($data['interests'] as $interest): ?>
@@ -93,7 +88,6 @@ $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
         </div>
     </section>
 
-    <!-- PROJECTS -->
     <section class="terminal-box projects">
         <div class="terminal-content">
             <?php foreach ($data['projects'] as $project): ?>
