@@ -1,18 +1,31 @@
 {
-  "name": "Šimek Antonín",
+  "name": "Antonín Šimek",
+  "role": "WhiteHat / DevOps",
+  "location": "Dobříš, CZ",
+  "email": "simek.antonin@zak.spspb.cz",
   "skills": [
-    "HTML",
-    "CSS",
-    "PHP",
-    "Git",
-    "MySQL"
+    "HTML5 & CSS3",
+    "JavaScript (ES6)",
+    "Python, C#, C++",
+    "Docker & CI/CD",
+    "Penetration Testing"
   ],
   "interests": [
-  "Tvorba REST API",
-  "Optimalizace výkonu aplikací",
-  "Databázový design",
-  "Cloudové služby",
-  "Bezpečnost webových aplikací",
-  "DevOps principy"
-]
+    "Cybersecurity",
+    "CTF Challenges",
+    "DevOps Automation",
+    "Chess Engines"
+  ],
+  "projects": [
+    {
+      "title": "Osobní portfolio",
+      "description": "Dynamický web s JSON daty",
+      "link": "https://github.com/antonin/portfolio"
+    },
+    {
+      "title": "Chess Engine",
+      "description": "Vlastní šachový engine v Pythonu",
+      "link": "https://github.com/antonin/chess-engine"
+    }
+  ]
 }
