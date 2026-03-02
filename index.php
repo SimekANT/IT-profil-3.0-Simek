@@ -77,7 +77,7 @@ $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>root@antonin:~/portfolio</title>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
