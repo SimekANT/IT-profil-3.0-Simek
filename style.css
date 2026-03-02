@@ -362,3 +362,12 @@ a {
 		height: 100px;
 	}
 }
+.success {
+    color: green;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
