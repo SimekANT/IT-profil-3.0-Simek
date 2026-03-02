@@ -15,6 +15,33 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
 $interests = $data["interests"];
+if (isset($_POST["new_interest"])) {
+
+    $newInterest = trim($_POST["new_interest"]);
+
+    if (empty($newInterest)) {
+        $message = "Pole nesmí být prázdné.";
+        $messageType = "error";
+    } else {
+
+        // kontrola duplicit (case-insensitive)
+        $lowerInterests = array_map("strtolower", $interests);
+
+        if (in_array(strtolower($newInterest), $lowerInterests)) {
+            $message = "Tento zájem už existuje.";
+            $messageType = "error";
+        } else {
+
+            $interests[] = $newInterest;
+            $data["interests"] = $interests;
+
+            file_put_contents("profile.json", json_encode($data, JSON_PRETTY_PRINT));
+
+            $message = "Zájem byl úspěšně přidán.";
+            $messageType = "success";
+        }
+    }
+}
 ?>
 
 <!doctype html>
@@ -110,6 +137,15 @@ $interests = $data["interests"];
             <?php endforeach; ?>
         </div>
     </section>
+    <?php if (!empty($message)): ?>
+        <p class="<?php echo $messageType; ?>">
+            <?php echo htmlspecialchars($message); ?>
+        </p>
+    <?php endif; ?>
+    <form method="POST">
+        <input type="text" name="new_interest" required>
+        <button type="submit">Přidat zájem</button>
+    </form>
 
 </main>
 
