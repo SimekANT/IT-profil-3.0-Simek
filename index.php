@@ -1,4 +1,6 @@
 <?php
+$message = "";
+$messageType = "";
 $jsonData = file_get_contents('profile.json');
 
 if ($jsonData === false) {
@@ -12,6 +14,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 }
 
 $sessionId = strtoupper(substr(md5(uniqid()), 0, 9));
+$interests = $data["interests"];
 ?>
 
 <!doctype html>
